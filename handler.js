@@ -991,6 +991,20 @@ module.exports = handle = (client, Client) => {
                         data.reply('error')
                     }
                     break
+	       case 'buildgi'
+			    const ririAb = "pic/thumb.jpg";
+			imageToBase64(ririAb).then(async(response) => {
+            const thumb = `${response}`; 
+			const text = `Build ${parameter}`;
+		try {
+            const build = fs.readFileSync(`database/buildgi/${parameter}.jpeg`);
+		    await conn.sendMessage(senderNumber, build, MessageType.image, { quoted: message, caption: text, thumbnail: thumb });
+		} catch (e) {
+			conn.sendMessage(senderNumber, "Karakter tidak ditemukan!", MessageType.text, { quoted: message });
+		}
+			});
+			break
+			    
                 case 'takestick':
                 case 'takestik':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
